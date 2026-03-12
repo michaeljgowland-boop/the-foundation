@@ -1,5 +1,5 @@
 // functions/api/join.js
-import { json } from './_shared/auth.js';
+import { json } from '../_shared/auth.js';
 
 export async function onRequestPost({ request, env }) {
   try {
