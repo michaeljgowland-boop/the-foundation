@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — The Foundation</title>
+<meta name="description" content="The Foundation exists to preserve, protect, and strengthen the institutions that civilisation depends on.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css">
+<style>
+  .about-hero {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10rem 2rem 6rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .about-hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 1px; height: 40%;
+    background: linear-gradient(to top, var(--gold-dim), transparent);
+  }
+
+  .mission-pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-top: 3rem;
+    border: 1px solid var(--border);
+  }
+
+  .pillar {
+    background: var(--deep);
+    padding: 2.5rem;
+    transition: background 0.3s;
+  }
+
+  .pillar:hover { background: var(--raised); }
+
+  .pillar-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .pillar h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .pillar p {
+    font-size: 0.9rem;
+    color: var(--subtle);
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+
+  .warning-section {
+    background: linear-gradient(135deg, #0d0808 0%, #1a0808 100%);
+    border-top: 1px solid #3a1515;
+    border-bottom: 1px solid #3a1515;
+  }
+
+  .warning-section h2 em { color: var(--crimson-bright); }
+  .warning-section .section-label { color: var(--crimson-bright); }
+  .warning-section .section-label::before,
+  .warning-section .section-label::after { background: #3a1515; }
+
+  .warning-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .warning-item {
+    padding: 1.5rem;
+    border: 1px solid #3a1515;
+    background: rgba(139,32,32,0.05);
+  }
+
+  .warning-item h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--crimson-bright);
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+  }
+
+  .warning-item p {
+    font-size: 0.88rem;
+    color: #9a8a8a;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  .who-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 2rem;
+  }
+
+  .who-text strong {
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  @media (max-width: 700px) {
+    .mission-pillars { grid-template-columns: 1fr; }
+    .warning-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-mark"><a href="/">The Foundation</a></div>
+  <ul class="nav-links">
+    <li><a href="/analysis.html">Analysis</a></li>
+    <li><a href="/convergence.html">The Convergence</a></li>
+    <li><a href="/about.html" class="active">About</a></li>
+    <li><a href="/contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-auth" id="nav-auth">
+    <a href="/join.html" class="nav-join">Join</a>
+  </div>
+</nav>
+
+<header class="about-hero">
+  <div class="hero-eyebrow">Established in defence of what matters</div>
+  <h1 class="hero-title">
+    The Foundation
+    <span>Preserving the institutions civilisation depends on</span>
+  </h1>
+  <div class="hero-rule"></div>
+  <p class="hero-tagline">The forces reshaping our world are not random. They are systematic, they are accelerating, and they are going largely unnamed. We are here to name them — and to act.</p>
+</header>
+
+<!-- THE DIAGNOSIS -->
+<section class="diagnosis" id="diagnosis">
+  <div class="section-inner">
+    <div class="section-label reveal">The Diagnosis</div>
+    <h2 class="reveal">Something fundamental is <em>being lost</em></h2>
+    <p class="lead reveal">We are living through a systematic transfer of power — not through revolution or conquest, but through the quiet, relentless logic of economic selection. The institutions that took centuries to build are being subordinated, one by one, to a single overriding purpose: the accumulation of private wealth and power.</p>
+    <p class="reveal">This is not a simple story about greed. It is a structural story about what happens when one selection system — the economic — is allowed to colonise all the others. When science must answer to its funders. When politics must answer to its donors. When the press must answer to its owners. When universities must answer to the market. The diversity of perspective and purpose that makes civilisation resilient begins, slowly and then rapidly, to collapse.</p>
+
+    <div class="three-columns reveal">
+      <div class="col-item">
+        <div class="col-number">I</div>
+        <h3>The Selection Problem</h3>
+        <p>Like natural environments, economic systems select for specific traits in the agents that thrive within them — not wisdom, not foresight, not care for others, but the capacity to accumulate and to win.</p>
+      </div>
+      <div class="col-item">
+        <div class="col-number">II</div>
+        <h3>The Capture of Institutions</h3>
+        <p>Political systems, scientific communities, academic institutions, and free media are being progressively subordinated to economic logic — losing the independence that makes them valuable to everyone.</p>
+      </div>
+      <div class="col-item">
+        <div class="col-number">III</div>
+        <h3>The Silencing of Dissent</h3>
+        <p>Those who understand the danger and try to sound the alarm are fragmented, under-resourced, and operating without a shared framework. Only one side in this contest knows a contest is underway.</p>
+      </div>
+    </div>
+
+    <div class="monument-quote reveal">
+      <p>The traits being selected for at the apex of our economic system are precisely the traits least suited to governing complex, fragile societies facing slow-building civilisational risks. This is not a coincidence. It is what selection environments do.</p>
+      <cite>From the analysis that founded The Foundation</cite>
+    </div>
+
+    <p class="reveal">The consequences of this are not abstract. The scientific evidence on climate change now points toward mitigation rather than prevention as the operative framework — we are past the window of avoidance and into the territory of managing what is coming. And yet the dominant economic agents treat even the raising of this alarm not as vital information but as a threat to their wealth and power. The people with the most power to act are those most constitutionally unable to act appropriately. That is the specific danger of the moment we are in.</p>
+  </div>
+</section>
+
+<!-- THE MISSION -->
+<section id="mission" style="background: var(--surface); border-top: 1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-label reveal">Our Purpose</div>
+    <h2 class="reveal">To preserve, protect, and <em>strengthen</em> the foundations</h2>
+    <p class="lead reveal">The Foundation exists to do what no single campaign, discipline, or institution can do alone: to hold the line at the level of the systems themselves — to defend the independence and integrity of the institutions through which every other problem must be addressed.</p>
+    <p class="reveal">We take our name and our inspiration from the understanding that in periods of systemic stress, the most important work is not fighting every battle on every front. It is identifying what is most worth preserving, gathering those who understand the stakes, and building the capacity to carry genuine knowledge, civic values, and institutional wisdom through whatever lies ahead.</p>
+
+    <div class="mission-pillars reveal">
+      <div class="pillar">
+        <div class="pillar-icon">I</div>
+        <h3>Analyse</h3>
+        <p>Develop and disseminate rigorous understanding of the structural forces undermining institutional independence — naming the mechanisms clearly enough that they can be recognised and contested.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">II</div>
+        <h3>Connect</h3>
+        <p>Build the cross-sectoral coalitions that currently do not exist — bringing together scientists, academics, journalists, public servants, and civic actors who share a common interest they rarely recognise as such.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">III</div>
+        <h3>Defend</h3>
+        <p>Actively support the institutions, individuals, and communities that are under pressure — providing resources, platforms, solidarity, and strategic intelligence to those on the front lines.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">IV</div>
+        <h3>Build</h3>
+        <p>Not merely preserve what exists but actively develop the institutional forms and civic capacities that a society navigating serious civilisational risk will need — thinking beyond the immediate crisis to what comes next.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE DANGER -->
+<section class="warning-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Why Now</div>
+    <h2 class="reveal">The window is <em>closing</em></h2>
+    <p class="lead reveal">We are not describing a slow, manageable decline that future generations can address at their leisure. The processes we are describing have momentum, and the feedback loops that would normally produce correction are being systematically disabled before the crisis fully arrives.</p>
+
+    <div class="warning-grid reveal">
+      <div class="warning-item">
+        <h4>Climate</h4>
+        <p>The science now indicates we are past prevention and into mitigation. The political and public consciousness has not caught up — and the agents best placed to accelerate that reckoning are those most invested in preventing it.</p>
+      </div>
+      <div class="warning-item">
+        <h4>Democracy</h4>
+        <p>Democratic institutions are being hollowed out not through sudden coup but through the patient work of defunding, delegitimising, and capturing the regulatory and civic structures that give democracy its substance.</p>
+      </div>
+      <div class="warning-item">
+        <h4>Inequality</h4>
+        <p>The concentration of wealth has reached levels that are not merely unjust but structurally destabilising — destroying the consumer foundations that market economies depend on while generating the political instability that threatens everything else.</p>
+      </div>
+      <div class="warning-item">
+        <h4>Technology</h4>
+        <p>Transformative technologies — artificial intelligence most urgently — are being developed and deployed at speed, with governance frameworks years behind, by agents whose selection environment gives them every incentive to resist meaningful oversight.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE ARE -->
+<section id="who" style="background: var(--void); border-top: 1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-label reveal">Who We Are</div>
+    <h2 class="reveal">People who understand <em>the stakes</em></h2>
+
+    <p class="who-text reveal">The Foundation is for <strong>scientists and researchers</strong> who have watched their fields become dependent on interests that have a stake in specific conclusions.</p>
+    <p class="who-text reveal">It is for <strong>educators and academics</strong> who have seen the long time horizons and genuine intellectual independence their work requires progressively eroded by market logic.</p>
+    <p class="who-text reveal">It is for <strong>journalists and communicators</strong> who understand that the infrastructure of public knowledge is being dismantled, and that this is not an accident.</p>
+    <p class="who-text reveal">It is for <strong>public servants and civic actors</strong> who have dedicated their working lives to institutions that are now under sustained and systematic pressure.</p>
+    <p class="who-text reveal">And it is for <strong>anyone</strong> — in any walk of life — who can see what is happening and understands that the fragmentation of the response is itself part of the problem. That the climate scientist, the labour organiser, the democratic theorist, and the public health researcher are engaged in structurally the same work and need to act as if they know it.</p>
+
+    <div class="monument-quote reveal">
+      <p>The solution needs to be as structural as the problem. Moral exhortation aimed at individuals will largely fail unless the selection environment itself changes. Our work is to change the environment.</p>
+      <cite>The Foundation — Statement of Purpose</cite>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="join">
+  <div class="section-inner">
+    <div class="section-label reveal">Join The Foundation</div>
+    <h2 class="reveal">The work <em>begins now</em></h2>
+    <p class="reveal">If this analysis seems important to you — if you recognise the pattern we are describing and believe that naming it clearly is the necessary first step toward contesting it — then we want to hear from you. The Foundation is being built by the people who join it.</p>
+    <div class="join-form reveal">
+      <input type="email" id="join-email" placeholder="Your email address" autocomplete="email">
+      <button type="button" id="join-btn">Join</button>
+    </div>
+    <p class="join-note reveal" id="join-message">We will write to you only with substance. No noise, no frequency for its own sake.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-rule"></div>
+  <div class="footer-inner">
+    <div class="footer-mark">The Foundation</div>
+    <nav class="footer-nav">
+      <a href="/analysis.html">Analysis</a>
+      <a href="/convergence.html">The Convergence</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+    <div class="footer-copy">In defence of what endures</div>
+  </div>
+</footer>
+
+<div id="auth-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div id="modal-login">
+      <div class="section-label">Account</div>
+      <h3>Sign in</h3>
+      <div class="form-group">
+        <input type="email" id="login-email" placeholder="Email address">
+        <input type="password" id="login-password" placeholder="Password">
+        <button class="btn-primary full-width" id="login-submit">Sign in</button>
+      </div>
+      <p class="form-switch">No account? <button class="link-btn" id="show-register">Register</button></p>
+      <p class="form-error hidden" id="login-error"></p>
+    </div>
+    <div id="modal-register" class="hidden">
+      <div class="section-label">Account</div>
+      <h3>Create account</h3>
+      <div class="form-group">
+        <input type="text" id="reg-name" placeholder="Display name">
+        <input type="email" id="reg-email" placeholder="Email address">
+        <input type="password" id="reg-password" placeholder="Password (min 8 chars)">
+        <button class="btn-primary full-width" id="register-submit">Create account</button>
+      </div>
+      <p class="form-switch">Have an account? <button class="link-btn" id="show-login">Sign in</button></p>
+      <p class="form-error hidden" id="register-error"></p>
+    </div>
+  </div>
+</div>
+
+<script src="/js/main.js"></script>
+<script>
+  document.querySelectorAll('.mission-pillars, .warning-grid').forEach(group => {
+    group.querySelectorAll('.pillar, .warning-item').forEach((child, i) => {
+      child.style.transitionDelay = `${i * 0.1}s`;
+    });
+  });
+
+  document.getElementById('join-btn').addEventListener('click', async () => {
+    const email = document.getElementById('join-email').value.trim();
+    const msg = document.getElementById('join-message');
+    if (!email) return;
+    const res = await fetch('/api/join', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, source: 'about' })
+    });
+    const data = await res.json();
+    msg.textContent = data.message || data.error;
+    msg.style.color = res.ok ? 'var(--gold)' : 'var(--crimson-bright)';
+    if (res.ok) document.getElementById('join-email').value = '';
+  });
+</script>
+</body>
+</html>

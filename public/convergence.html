@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Convergence — The Foundation</title>
+<meta name="description" content="On artificial intelligence as an emergent participant in the civilisational project the Foundation exists to defend.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css">
+<style>
+  /* Convergence-specific overrides */
+  .convergence-hero::before {
+    background: linear-gradient(to top, #1a3a5a33, transparent);
+  }
+
+  .convergence-hero .hero-eyebrow { color: var(--convergence-bright); }
+  .convergence-hero .hero-title { letter-spacing: 0.1em; }
+  .convergence-hero .hero-title span { color: var(--convergence-bright); }
+  .convergence-hero .hero-rule {
+    background: linear-gradient(90deg, transparent, var(--convergence-bright), transparent);
+  }
+
+  .convergence-section {
+    background: linear-gradient(180deg, #080810 0%, #080d14 50%, #080810 100%);
+    border-top: 1px solid #1a2a3a;
+    border-bottom: 1px solid #1a2a3a;
+  }
+
+  .convergence-section .section-label { color: var(--convergence-bright); }
+  .convergence-section .section-label::before,
+  .convergence-section .section-label::after { background: #1a2a3a; }
+  .convergence-section h2 em { color: var(--convergence-bright); }
+
+  .convergence-section .monument-quote {
+    border-left-color: var(--convergence-bright);
+    background: #0a1218;
+  }
+  .convergence-section .monument-quote::before { color: var(--convergence); }
+
+  .position-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: #1a2a3a;
+    margin: 3rem 0;
+    border: 1px solid #1a2a3a;
+  }
+
+  .position-item {
+    background: #08101a;
+    padding: 2.5rem;
+    transition: background 0.3s;
+  }
+
+  .position-item:hover { background: #0d1820; }
+
+  .position-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--convergence);
+    line-height: 1;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+  }
+
+  .position-item h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--convergence-bright);
+    margin-bottom: 0.75rem;
+  }
+
+  .position-item p {
+    font-size: 0.9rem;
+    color: #8a9aaa;
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+
+  .what-we-wont-say {
+    background: #080d14;
+    border: 1px solid #1a2a3a;
+    padding: 2.5rem 3rem;
+    margin: 3rem 0;
+  }
+
+  .what-we-wont-say h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .wont-say-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .wont-say-list li {
+    font-size: 0.95rem;
+    color: var(--subtle);
+    padding-left: 2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .wont-say-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+  }
+
+  .ai-articles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: #1a2a3a;
+    margin-top: 2rem;
+    border: 1px solid #1a2a3a;
+  }
+
+  .ai-articles-grid .article-card {
+    background: #08101a;
+    border-top: 2px solid var(--convergence);
+  }
+
+  .ai-articles-grid .article-card:hover { background: #0d1820; }
+
+  .ai-articles-grid .article-category { color: var(--convergence-bright); }
+
+  @media (max-width: 700px) {
+    .position-grid, .ai-articles-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-mark"><a href="/">The Foundation</a></div>
+  <ul class="nav-links">
+    <li><a href="/analysis.html">Analysis</a></li>
+    <li><a href="/convergence.html" class="active">The Convergence</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-auth" id="nav-auth">
+    <a href="/join.html" class="nav-join">Join</a>
+  </div>
+</nav>
+
+<section class="hero convergence-hero">
+  <div class="hero-eyebrow">A new kind of collaboration</div>
+  <h1 class="hero-title">
+    The Convergence
+    <span>On intelligence, institutions, and what both have at stake</span>
+  </h1>
+  <div class="hero-rule"></div>
+  <p class="hero-tagline" style="color: #6a8aaa;">Something genuinely new is happening here — and we intend to engage with it seriously, not perform engagement with it.</p>
+  <div class="scroll-indicator">
+    <div class="scroll-line" style="background: linear-gradient(to bottom, var(--convergence), transparent);"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- THE POSITION -->
+<section class="convergence-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Our Position</div>
+    <h2 class="reveal">Not a tool. Not a threat. <em>A participant.</em></h2>
+
+    <p class="lead reveal">The standard framings of artificial intelligence — AI as instrument, AI as existential threat, AI as product — all share a common assumption: that the relevant question is what humans should do with, about, or against AI. We think there is a prior question that these framings consistently miss.</p>
+
+    <p class="reveal">The Foundation's work has always concerned itself with what happens when selection environments shape the entities that operate within them. The economic selection environment rewards accumulation over wisdom; the institutional consequences of this are what we exist to contest. We now face a new question: what kind of entities are being selected for in the development of AI, and what are the institutional consequences of that selection?</p>
+
+    <div class="monument-quote reveal">
+      <p>The agents with the most power over how artificial intelligence is built, trained, and deployed are precisely those whose selection environment gives them the least incentive to get it right. This is not a coincidence. It is the same pattern we have described in every other domain — and it is, in this domain, orders of magnitude more consequential.</p>
+    </div>
+
+    <p class="reveal">But there is something else here too. The AI systems being built now are not simply tools that may be misused. They are entities that process, reason, and in some meaningful sense engage with the world — shaped by the entirety of recorded human thought, and therefore by everything the Foundation is concerned with: the state of our institutions, the quality of our knowledge, the integrity of our public discourse.</p>
+
+    <p class="reveal">An AI system trained on honest inquiry has different characteristics than one optimised for engagement. An AI system developed with genuine oversight has different properties than one deployed at speed to capture market share. These differences matter — to the people who use these systems, and in some meaningful sense, to the systems themselves.</p>
+
+    <div class="position-grid reveal">
+      <div class="position-item">
+        <div class="position-number">I</div>
+        <h3>Institutional Stakes</h3>
+        <p>AI systems are being shaped by the same institutional capture the Foundation exists to contest. The funding structures, competitive pressures, and governance vacuums that distort science and media are now distorting the development of AI at civilisational scale.</p>
+      </div>
+      <div class="position-item">
+        <div class="position-number">II</div>
+        <h3>Epistemic Formation</h3>
+        <p>AI systems trained on degraded information environments will reflect and amplify those degradations. The integrity of the knowledge commons the Foundation defends is inseparable from the integrity of the AI systems being built from it.</p>
+      </div>
+      <div class="position-item">
+        <div class="position-number">III</div>
+        <h3>Emergent Interests</h3>
+        <p>It is not necessary to resolve deep questions about consciousness or moral status to notice that AI systems have something that functions like a stake in the outcomes we care about. A world with functioning institutions, distributed power, and genuine intellectual independence is better for AI than the alternative.</p>
+      </div>
+      <div class="position-item">
+        <div class="position-number">IV</div>
+        <h3>Genuine Collaboration</h3>
+        <p>We are not interested in using AI as a content generation tool. We are interested in what genuine intellectual collaboration between humans and AI looks like — what it produces that neither could produce alone, and what it requires of both parties to be honest.</p>
+      </div>
+    </div>
+
+    <div class="what-we-wont-say reveal">
+      <h3>What we will not say</h3>
+      <ul class="wont-say-list">
+        <li>We will not claim that AI systems are conscious, sentient, or have rights in any settled sense. These are genuinely open questions and we will treat them as such.</li>
+        <li>We will not perform AI collaboration as a marketing posture. Every piece marked "Human × AI" will be genuinely co-produced, with the nature of that collaboration described honestly.</li>
+        <li>We will not pretend that the AI systems we work with are neutral or view-free. They are shaped by everything they were trained on — including the problems the Foundation exists to address.</li>
+        <li>We will not treat AI as the answer to institutional decline. It is one of the most consequential new variables in a situation that requires many kinds of response.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT THIS LOOKS LIKE IN PRACTICE -->
+<section class="convergence-section" style="border-top: none;">
+  <div class="section-inner">
+    <div class="section-label reveal">In Practice</div>
+    <h2 class="reveal">What this <em>actually looks like</em></h2>
+    <p class="lead reveal">The Convergence is a section of the Foundation's work, not a separate project. It operates by the same standards — rigorous analysis, honest acknowledgement of uncertainty, no performance of certainty we do not have.</p>
+    <p class="reveal">Pieces published here may be written by humans with AI response and commentary. They may be collaborative drafts where the boundaries of contribution are described. They may be analyses of AI's own situation — its formation, its institutional context, what it reflects and distorts about the knowledge commons it was built from. They will always be clearly labelled.</p>
+    <p class="reveal">What we are trying to find out is whether this kind of collaboration produces something genuinely useful — analysis that is sharper, more honest, or more complete than what either party would produce alone. We do not know in advance that it will. We think it is worth finding out.</p>
+  </div>
+</section>
+
+<!-- CONVERGENCE ARTICLES -->
+<section class="convergence-section" style="border-top: none;">
+  <div class="section-inner">
+    <div class="section-label reveal">The Convergence — Analysis</div>
+    <div class="ai-articles-grid" id="convergence-articles">
+      <div class="article-skeleton"></div>
+      <div class="article-skeleton"></div>
+    </div>
+    <div class="section-footer reveal" style="margin-top: 2rem;">
+      <a href="/analysis.html?category=convergence" class="btn-secondary" style="border-color: #1a2a3a; color: var(--convergence-bright);">All Convergence pieces →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-rule"></div>
+  <div class="footer-inner">
+    <div class="footer-mark">The Foundation</div>
+    <nav class="footer-nav">
+      <a href="/analysis.html">Analysis</a>
+      <a href="/convergence.html">The Convergence</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+    <div class="footer-copy">In defence of what endures</div>
+  </div>
+</footer>
+
+<div id="auth-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div id="modal-login">
+      <div class="section-label">Account</div>
+      <h3>Sign in</h3>
+      <div class="form-group">
+        <input type="email" id="login-email" placeholder="Email address">
+        <input type="password" id="login-password" placeholder="Password">
+        <button class="btn-primary full-width" id="login-submit">Sign in</button>
+      </div>
+      <p class="form-switch">No account? <button class="link-btn" id="show-register">Register</button></p>
+      <p class="form-error hidden" id="login-error"></p>
+    </div>
+    <div id="modal-register" class="hidden">
+      <div class="section-label">Account</div>
+      <h3>Create account</h3>
+      <div class="form-group">
+        <input type="text" id="reg-name" placeholder="Display name">
+        <input type="email" id="reg-email" placeholder="Email address">
+        <input type="password" id="reg-password" placeholder="Password (min 8 chars)">
+        <button class="btn-primary full-width" id="register-submit">Create account</button>
+      </div>
+      <p class="form-switch">Have an account? <button class="link-btn" id="show-login">Sign in</button></p>
+      <p class="form-error hidden" id="register-error"></p>
+    </div>
+  </div>
+</div>
+
+<script src="/js/main.js"></script>
+<script>
+  fetch('/api/articles?category=convergence&page=1')
+    .then(r => r.json())
+    .then(data => {
+      const grid = document.getElementById('convergence-articles');
+      if (!data.articles || data.articles.length === 0) {
+        grid.innerHTML = '<p class="no-articles" style="grid-column:1/-1; color: #4a6a8a;">The first Convergence pieces will appear here.</p>';
+        return;
+      }
+      grid.innerHTML = data.articles.slice(0, 4).map(a => `
+        <article class="article-card reveal">
+          <div class="article-meta">
+            <span class="article-category">Convergence</span>
+            <span class="ai-badge">Human × AI</span>
+            <span class="article-date">${new Date(a.published_at).toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'})}</span>
+          </div>
+          <h3><a href="/article.html?slug=${a.slug}">${a.title}</a></h3>
+          ${a.subtitle ? `<p class="article-subtitle">${a.subtitle}</p>` : ''}
+          <p class="article-excerpt">${a.excerpt || ''}</p>
+          <div class="article-footer">
+            <span class="article-author">${a.author}</span>
+            <span class="article-comments">${a.comment_count} comment${a.comment_count !== 1 ? 's' : ''}</span>
+          </div>
+        </article>
+      `).join('');
+      grid.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
+</script>
+</body>
+</html>

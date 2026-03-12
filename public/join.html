@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join — The Foundation</title>
+<meta name="description" content="Create an account to join the discussion on The Foundation's analysis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css">
+<style>
+  .join-page {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem;
+  }
+
+  .join-page-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    max-width: 900px;
+    width: 100%;
+    align-items: start;
+  }
+
+  .join-context h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .join-context p {
+    font-size: 0.95rem;
+    color: var(--subtle);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+
+  .join-context .context-item {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .context-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .context-item p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+  }
+
+  .context-item strong {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+
+  .auth-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 3rem;
+  }
+
+  .auth-panel .section-label {
+    font-size: 0.55rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .auth-panel h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--white);
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+
+  .tab-switcher {
+    display: flex;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tab-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: none;
+    padding: 0.75rem 1.5rem 0.75rem 0;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+
+  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  @media (max-width: 700px) {
+    .join-page-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .join-context { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-mark"><a href="/">The Foundation</a></div>
+  <ul class="nav-links">
+    <li><a href="/analysis.html">Analysis</a></li>
+    <li><a href="/convergence.html">The Convergence</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-auth" id="nav-auth"></div>
+</nav>
+
+<main class="join-page">
+  <div class="join-page-inner">
+
+    <div class="join-context">
+      <div class="section-label">Create an account</div>
+      <h2>Join the <em>discussion</em></h2>
+      <p>An account allows you to participate in the discussion on Foundation articles. We moderate all comments before they appear publicly.</p>
+
+      <div class="context-item">
+        <div class="context-icon">I</div>
+        <div>
+          <strong>Substantive discussion</strong>
+          <p>Comments on our analysis, responses to The Convergence pieces, and engagement with the ideas we publish.</p>
+        </div>
+      </div>
+      <div class="context-item">
+        <div class="context-icon">II</div>
+        <div>
+          <strong>Moderated space</strong>
+          <p>All comments are reviewed before publication. We are building a space for serious engagement, not for noise.</p>
+        </div>
+      </div>
+      <div class="context-item">
+        <div class="context-icon">III</div>
+        <div>
+          <strong>Part of something larger</strong>
+          <p>The Foundation is the first node of the ourinter.net network. Your account will extend to the broader platform as it develops.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-panel" id="auth-panel">
+      <div class="section-label">The Foundation</div>
+
+      <div class="tab-switcher">
+        <button class="tab-btn active" id="tab-register">Create account</button>
+        <button class="tab-btn" id="tab-login">Sign in</button>
+      </div>
+
+      <!-- Register -->
+      <div id="panel-register">
+        <div class="form-group">
+          <input type="text" id="reg-name" placeholder="Display name" autocomplete="name">
+          <input type="email" id="reg-email" placeholder="Email address" autocomplete="email">
+          <input type="password" id="reg-password" placeholder="Password (min 8 characters)" autocomplete="new-password">
+          <button class="btn-primary full-width" id="register-submit">Create account</button>
+        </div>
+        <p class="form-error hidden" id="register-error"></p>
+        <p style="font-size: 0.8rem; color: var(--muted); margin-top: 1.5rem; font-style: italic;">
+          Your email is used only for account access. We do not share it.
+        </p>
+      </div>
+
+      <!-- Login -->
+      <div id="panel-login" class="hidden">
+        <div class="form-group">
+          <input type="email" id="login-email" placeholder="Email address" autocomplete="email">
+          <input type="password" id="login-password" placeholder="Password" autocomplete="current-password">
+          <button class="btn-primary full-width" id="login-submit">Sign in</button>
+        </div>
+        <p class="form-error hidden" id="login-error"></p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-rule"></div>
+  <div class="footer-inner">
+    <div class="footer-mark">The Foundation</div>
+    <nav class="footer-nav">
+      <a href="/analysis.html">Analysis</a>
+      <a href="/convergence.html">The Convergence</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+    <div class="footer-copy">In defence of what endures</div>
+  </div>
+</footer>
+
+<!-- No auth modal needed on this page - it IS the auth page -->
+<div id="auth-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div id="modal-login"><div id="modal-login-inner"></div></div>
+    <div id="modal-register" class="hidden"></div>
+  </div>
+</div>
+
+<script src="/js/main.js"></script>
+<script>
+  // Tab switching
+  document.getElementById('tab-register').addEventListener('click', () => {
+    document.getElementById('tab-register').classList.add('active');
+    document.getElementById('tab-login').classList.remove('active');
+    document.getElementById('panel-register').classList.remove('hidden');
+    document.getElementById('panel-login').classList.add('hidden');
+  });
+
+  document.getElementById('tab-login').addEventListener('click', () => {
+    document.getElementById('tab-login').classList.add('active');
+    document.getElementById('tab-register').classList.remove('active');
+    document.getElementById('panel-login').classList.remove('hidden');
+    document.getElementById('panel-register').classList.add('hidden');
+  });
+
+  // Register
+  document.getElementById('register-submit').addEventListener('click', async () => {
+    const display_name = document.getElementById('reg-name').value.trim();
+    const email = document.getElementById('reg-email').value.trim();
+    const password = document.getElementById('reg-password').value;
+    const errEl = document.getElementById('register-error');
+
+    const res = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ display_name, email, password })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      // Redirect to homepage or previous page
+      const returnTo = new URLSearchParams(window.location.search).get('return') || '/';
+      window.location.href = returnTo;
+    } else {
+      errEl.textContent = data.error;
+      errEl.classList.remove('hidden');
+    }
+  });
+
+  // Login
+  document.getElementById('login-submit').addEventListener('click', async () => {
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    const errEl = document.getElementById('login-error');
+
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      const returnTo = new URLSearchParams(window.location.search).get('return') || '/';
+      window.location.href = returnTo;
+    } else {
+      errEl.textContent = data.error;
+      errEl.classList.remove('hidden');
+    }
+  });
+
+  // If already logged in, redirect
+  fetch('/api/auth/me').then(r => r.json()).then(data => {
+    if (data.authenticated) window.location.href = '/';
+  });
+</script>
+</body>
+</html>
