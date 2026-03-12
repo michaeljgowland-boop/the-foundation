@@ -156,3 +156,4 @@ This site is designed to be the first node of the broader ourinter.net network. 
 - Shared auth (single sign-on across subdomains)
 - Shared user table or cross-domain session tokens
 - Foundation members as early adopters of the broader network
+# the-foundation
