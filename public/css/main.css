@@ -442,6 +442,142 @@ p:last-child { margin-bottom: 0; }
 
 .full-width { display: block; width: 100%; }
 
+/* =================== MANIFESTO TEASER =================== */
+.manifesto-teaser {
+  background: var(--void);
+  border-bottom: 1px solid var(--border);
+  padding: 7rem 2rem;
+}
+
+.manifesto-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  margin-top: 3rem;
+}
+
+.manifesto-pillar {
+  padding: 2.5rem 2.25rem;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.manifesto-pillar:last-child { border-right: none; }
+
+.pillar-marker {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--gold-dim);
+  line-height: 1;
+  margin-bottom: 1.2rem;
+  opacity: 0.4;
+}
+
+.manifesto-pillar p {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--subtle);
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .manifesto-pillars { grid-template-columns: 1fr; }
+  .manifesto-pillar { border-right: none; border-bottom: 1px solid var(--border); }
+  .manifesto-pillar:last-child { border-bottom: none; }
+}
+
+/* =================== ACTION SECTION =================== */
+.action-section {
+  background: var(--deep);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 7rem 2rem;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  margin-top: 3rem;
+}
+
+.action-card {
+  padding: 2.75rem 2.25rem;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.action-card:last-child { border-right: none; }
+
+.action-number {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.5em;
+  color: var(--gold-dim);
+  margin-bottom: 0.25rem;
+}
+
+.action-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.action-card p {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--subtle);
+  margin: 0;
+  flex: 1;
+}
+
+.action-link {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold-dim);
+  padding-bottom: 0.2rem;
+  align-self: flex-start;
+  transition: color 0.2s, border-color 0.2s;
+}
+.action-link:hover { color: var(--gold); border-color: var(--gold); }
+
+.action-honest {
+  margin-top: 3rem;
+  padding: 2rem 2.5rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold-dim);
+  background: var(--surface);
+}
+
+.action-honest p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--subtle);
+  line-height: 1.7;
+  margin: 0;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .action-grid { grid-template-columns: 1fr; }
+  .action-card { border-right: none; border-bottom: 1px solid var(--border); }
+  .action-card:last-child { border-bottom: none; }
+}
+
 /* =================== DIAGNOSIS COLUMNS =================== */
 .diagnosis, .latest-section {
   background: var(--deep);

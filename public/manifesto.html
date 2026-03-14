@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Call to Build — The Foundation Manifesto</title>
+<meta name="description" content="The founding document of The Foundation — a call to help build the coalition and governance architecture that the crisis of our time requires.">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Foundation">
+<meta property="og:url" content="https://thefoundation.ourinter.net/manifesto.html">
+<meta property="og:title" content="A Call to Build — The Foundation Manifesto">
+<meta property="og:description" content="This is not a finished institution issuing a programme. It is an argument in search of the people who can test it, extend it, and where it is wrong, correct it.">
+<meta property="og:image" content="https://thefoundation.ourinter.net/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A Call to Build — The Foundation Manifesto">
+<meta name="twitter:description" content="This is not a finished institution issuing a programme. It is an argument in search of the people who can test it, extend it, and where it is wrong, correct it.">
+<meta name="twitter:image" content="https://thefoundation.ourinter.net/og-default.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-mark"><a href="/">The Foundation</a></div>
+  <ul class="nav-links">
+    <li><a href="/analysis.html">Analysis</a></li>
+    <li><a href="/convergence.html">The Convergence</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-auth" id="nav-auth">
+    <a href="/join.html" class="nav-join">Join</a>
+  </div>
+</nav>
+
+<main class="article-page" id="article-content">
+  <div style="text-align:center; padding: 6rem 0; color: var(--muted);">
+    <div class="article-skeleton" style="height: 60px; max-width: 600px; margin: 0 auto 2rem;"></div>
+    <div class="article-skeleton" style="height: 20px; max-width: 400px; margin: 0 auto;"></div>
+  </div>
+</main>
+
+<div id="auth-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div id="modal-login">
+      <div class="section-label">Account</div>
+      <h3>Sign in to comment</h3>
+      <div class="form-group">
+        <input type="email" id="login-email" placeholder="Email address">
+        <input type="password" id="login-password" placeholder="Password">
+        <button class="btn-primary full-width" id="login-submit">Sign in</button>
+      </div>
+      <p class="form-switch">No account? <button class="link-btn" id="show-register">Register</button></p>
+      <p class="form-error hidden" id="login-error"></p>
+    </div>
+    <div id="modal-register" class="hidden">
+      <div class="section-label">Account</div>
+      <h3>Create account</h3>
+      <div class="form-group">
+        <input type="text" id="reg-name" placeholder="Display name">
+        <input type="email" id="reg-email" placeholder="Email address">
+        <input type="password" id="reg-password" placeholder="Password (min 8 chars)">
+        <button class="btn-primary full-width" id="register-submit">Create account</button>
+      </div>
+      <p class="form-switch">Have an account? <button class="link-btn" id="show-login">Sign in</button></p>
+      <p class="form-error hidden" id="register-error"></p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-rule"></div>
+  <div class="footer-inner">
+    <div class="footer-mark">The Foundation</div>
+    <nav class="footer-nav">
+      <a href="/analysis.html">Analysis</a>
+      <a href="/convergence.html">The Convergence</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+    <div class="footer-copy">In defence of what endures</div>
+  </div>
+</footer>
+
+<script>
+  // manifesto.html always loads the 'a-call-to-build' article
+  // Override the URL param before the article loader runs
+  history.replaceState(null, '', '/manifesto.html?slug=a-call-to-build');
+</script>
+<script src="/js/main.js"></script>
+<script>
+  const slug = new URLSearchParams(window.location.search).get('slug');
+  if (!slug) { window.location.href = '/analysis.html'; }
+
+  async function loadArticle() {
+    // Fetch article metadata
+    const res = await fetch(`/api/articles/${slug}`);
+    if (!res.ok) {
+      document.getElementById('article-content').innerHTML =
+        '<p style="text-align:center; color: var(--muted); padding: 6rem 0;">Article not found.</p>';
+      return;
+    }
+    const article = await res.json();
+    document.title = `${article.title} — The Foundation`;
+
+    // Fetch article HTML content
+    const contentRes = await fetch(`/${article.content_file}`);
+    const bodyHtml = contentRes.ok ? await contentRes.text() : '<p>Content unavailable.</p>';
+
+    const isConvergence = article.category === 'convergence' || article.is_ai_collaborative;
+    const accentColor = isConvergence ? 'var(--convergence-bright)' : 'var(--gold)';
+
+    document.getElementById('article-content').innerHTML = `
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="article-category" style="color: ${accentColor}">${article.category}</span>
+          ${article.is_ai_collaborative ? '<span class="ai-badge">Human × AI</span>' : ''}
+          <span class="article-date">${new Date(article.published_at).toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'})}</span>
+        </div>
+        <h1>${article.title}</h1>
+        ${article.subtitle ? `<p class="article-subtitle">${article.subtitle}</p>` : ''}
+        <div class="article-byline">By ${article.author}</div>
+      </header>
+
+      <div class="article-divider" style="background: ${accentColor}; opacity: 0.4;"></div>
+
+      <div class="article-body">${bodyHtml}</div>
+
+      <div class="article-divider"></div>
+
+      <section class="comments-section">
+        <div class="section-label">Discussion</div>
+        <div id="comments-list"></div>
+        <div class="comment-form" id="comment-form-area"></div>
+      </section>
+    `;
+
+    loadComments();
+    renderCommentForm();
+  }
+
+  async function loadComments() {
+    const res = await fetch(`/api/comments/${slug}`);
+    const data = await res.json();
+    const list = document.getElementById('comments-list');
+
+    if (!data.comments || data.comments.length === 0) {
+      list.innerHTML = '<p style="color: var(--muted); font-style: italic; padding: 1.5rem 0;">No comments yet. Be the first to respond.</p>';
+      return;
+    }
+
+    list.innerHTML = data.comments.map(c => `
+      <div class="comment">
+        <div class="comment-header">
+          <span class="comment-author">${c.display_name}</span>
+          <span class="comment-date">${new Date(c.created_at).toLocaleDateString('en-GB', {day:'numeric',month:'long',year:'numeric'})}</span>
+        </div>
+        <div class="comment-body">${c.body.replace(/\n/g, '<br>')}</div>
+        <div class="comment-actions">
+          <button class="comment-flag" onclick="flagComment(${c.id})">Flag</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderCommentForm() {
+    const area = document.getElementById('comment-form-area');
+    const user = window.foundationAuth?.getCurrentUser();
+
+    if (!user) {
+      area.innerHTML = `
+        <div style="padding: 2rem; border: 1px solid var(--border); text-align: center;">
+          <p style="color: var(--subtle); margin-bottom: 1.5rem;">
+            <a href="#" onclick="window.foundationAuth.openModal('login'); return false;" style="color: var(--gold);">Sign in</a>
+            or
+            <a href="#" onclick="window.foundationAuth.openModal('register'); return false;" style="color: var(--gold);">create an account</a>
+            to join the discussion.
+          </p>
+        </div>
+      `;
+      return;
+    }
+
+    area.innerHTML = `
+      <h4>Leave a response</h4>
+      <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem;">
+        Comments are moderated before appearing publicly.
+      </p>
+      <textarea id="comment-body" placeholder="Your response…"></textarea>
+      <div style="display:flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+        <p class="form-note" id="comment-feedback"></p>
+        <button class="btn-primary" id="comment-submit" style="margin-left: 0;">Submit</button>
+      </div>
+    `;
+
+    document.getElementById('comment-submit').addEventListener('click', async () => {
+      const body = document.getElementById('comment-body').value.trim();
+      const feedback = document.getElementById('comment-feedback');
+      if (!body) return;
+
+      const res = await fetch(`/api/comments/${slug}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ body })
+      });
+
+      const data = await res.json();
+      feedback.textContent = data.message || data.error;
+      feedback.style.color = res.ok ? 'var(--gold)' : 'var(--crimson-bright)';
+      if (res.ok) document.getElementById('comment-body').value = '';
+    });
+  }
+
+  async function flagComment(id) {
+    const user = window.foundationAuth?.getCurrentUser();
+    if (!user) { window.foundationAuth?.openModal('login'); return; }
+    await fetch('/api/comments/flag', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ comment_id: id })
+    });
+  }
+
+  loadArticle();
+</script>
+</body>
+</html>
