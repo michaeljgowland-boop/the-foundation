@@ -198,6 +198,24 @@ nav.scrolled {
   overflow: hidden;
 }
 
+@media (max-height: 800px) {
+  .hero {
+    padding: calc(var(--nav-height) + 2.5rem) 2rem 4rem;
+    min-height: 100svh;
+  }
+  .hero-rule { margin: 1.6rem auto; }
+  .hero-cta { margin-top: 2.2rem; }
+}
+
+@media (max-height: 650px) {
+  .hero {
+    padding: calc(var(--nav-height) + 1.5rem) 2rem 3rem;
+  }
+  .hero-rule { margin: 1.2rem auto; }
+  .hero-cta { margin-top: 1.5rem; }
+  .scroll-indicator { display: none; }
+}
+
 /* vertical descending line */
 .hero::after {
   content: '';
@@ -223,7 +241,7 @@ nav.scrolled {
 
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(4rem, 10vw, 8.5rem);
+  font-size: clamp(3.2rem, 9vw, 8.5rem);
   font-weight: 300;
   line-height: 0.95;
   letter-spacing: 0.16em;
@@ -237,11 +255,20 @@ nav.scrolled {
   display: block;
   font-weight: 700;
   font-style: italic;
-  font-size: 0.34em;
-  letter-spacing: 0.52em;
+  font-size: clamp(0.95rem, 1.8vw, 2.9rem);
+  letter-spacing: clamp(0.12em, 0.35vw, 0.52em);
   color: var(--gold);
   margin-top: 0.65em;
   line-height: 1.4;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .hero-title span {
+    white-space: normal;
+    font-size: clamp(0.85rem, 3.5vw, 1.3rem);
+    letter-spacing: 0.18em;
+  }
 }
 
 .hero-rule {
