@@ -90,7 +90,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(7, 7, 15, 0.55);
+  background: rgba(7, 7, 15, 0.78);
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
   border-bottom: 1px solid rgba(40, 40, 74, 0);
@@ -131,14 +131,14 @@ nav.scrolled {
   font-size: 0.58rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--subtle);
+  color: var(--bright);
   text-decoration: none;
   padding: 0.6rem 1.1rem;
   border-bottom: 2px solid transparent;
   transition: color 0.25s, border-color 0.25s;
 }
-.nav-links li a:hover  { color: var(--gold); }
-.nav-links li a.active { color: var(--gold); border-bottom-color: var(--gold-dim); }
+.nav-links li a:hover  { color: var(--gold-bright); }
+.nav-links li a.active { color: var(--gold); border-bottom-color: var(--gold); }
 
 /* right side */
 .nav-auth {
@@ -214,6 +214,35 @@ nav.scrolled {
   .hero-rule { margin: 1.2rem auto; }
   .hero-cta { margin-top: 1.5rem; }
   .scroll-indicator { display: none; }
+}
+
+/* On mobile viewports: reduce hero height so next section peeks into view,
+   making it obvious there is more content below */
+@media (max-width: 760px) {
+  .hero {
+    min-height: 88svh;
+    padding: calc(var(--nav-height) + 3rem) 1.5rem 5rem;
+    justify-content: center;
+  }
+  /* Emphasise scroll indicator on mobile — it's the only cue */
+  .scroll-indicator {
+    opacity: 0;
+    animation: fadeIn 1s ease 2.2s forwards;
+  }
+  .scroll-indicator span {
+    color: var(--gold-dim);
+  }
+  .scroll-line {
+    height: 48px;
+    background: linear-gradient(to bottom, var(--gold-dim), transparent);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 85svh;
+    padding: calc(var(--nav-height) + 2rem) 1.25rem 4rem;
+  }
 }
 
 /* vertical descending line */
@@ -321,7 +350,7 @@ nav.scrolled {
   font-size: 0.5rem;
   letter-spacing: 0.45em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--subtle);
 }
 
 .scroll-line {
@@ -1119,10 +1148,83 @@ footer {
   .articles-full-grid { grid-template-columns: 1fr 1fr; }
 }
 
+/* =================== HAMBURGER MENU =================== */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 110;
+}
+.nav-hamburger span {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--bright);
+  transition: transform 0.3s ease, opacity 0.3s ease, background 0.2s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); background: var(--gold); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background: var(--gold); }
+
+.nav-mobile-menu {
+  display: none;
+  position: fixed;
+  top: var(--nav-height);
+  left: 0; right: 0;
+  background: rgba(7, 7, 15, 0.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  z-index: 99;
+  padding: 1.5rem 0 2rem;
+  transform: translateY(-8px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.nav-mobile-menu.open {
+  transform: translateY(0);
+  opacity: 1;
+}
+.nav-mobile-menu a {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--bright);
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border-soft);
+  transition: color 0.2s, background 0.2s;
+}
+.nav-mobile-menu a:last-child { border-bottom: none; }
+.nav-mobile-menu a:hover { color: var(--gold); background: rgba(200,168,75,0.04); }
+.nav-mobile-menu a.active { color: var(--gold); }
+.nav-mobile-menu .mobile-join {
+  margin: 1rem 2rem 0;
+  display: inline-block;
+  color: var(--void);
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  text-align: center;
+  padding: 0.75rem 2rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+}
+.nav-mobile-menu .mobile-join:hover { background: transparent; color: var(--gold); }
+
 @media (max-width: 760px) {
   :root { --nav-height: 60px; }
   nav { padding: 0 1.25rem; }
   .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-mobile-menu { display: block; }
 
   .articles-grid,
   .articles-full-grid { grid-template-columns: 1fr; }
@@ -1132,6 +1234,7 @@ footer {
   .col-item:last-child { border-bottom: none; }
 
   .footer-inner { flex-direction: column; text-align: center; gap: 1.25rem; }
+  .footer-nav { flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.5rem; }
 
   .join-form { flex-direction: column; }
   .join-form input { border-right: 1px solid var(--border); border-bottom: none; }

@@ -161,6 +161,15 @@
     <a href="/join.html" class="nav-join">Join</a>
   </div>
 </nav>
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="/manifesto.html">Manifesto</a>
+  <a href="/analysis.html">Analysis</a>
+  <a href="/action.html">Action</a>
+  <a href="/convergence.html">The Convergence</a>
+  <a href="/about.html">About</a>
+  <a href="/contact.html">Contact</a>
+  <a href="/join.html" class="mobile-join">Join</a>
+</div>
 
 <header class="about-hero">
   <div class="hero-eyebrow">Established in defence of what matters</div>
@@ -306,11 +315,16 @@
   <div class="footer-inner">
     <div class="footer-mark">The Foundation</div>
     <nav class="footer-nav">
+      <a href="/manifesto.html">Manifesto</a>
       <a href="/analysis.html">Analysis</a>
+      <a href="/action.html">Action</a>
       <a href="/convergence.html">The Convergence</a>
       <a href="/about.html">About</a>
       <a href="/contact.html">Contact</a>
-    </nav>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+  </nav>
     <div class="footer-copy">In defence of what endures</div>
   </div>
 </footer>
@@ -367,6 +381,32 @@
     msg.style.color = res.ok ? 'var(--gold)' : 'var(--crimson-bright)';
     if (res.ok) document.getElementById('join-email').value = '';
   });
+</script>
+<script>
+  // Hamburger menu toggle
+  const hamburger = document.getElementById('nav-hamburger');
+  const mobileMenu = document.getElementById('nav-mobile-menu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    });
+    // Close on link click
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+      });
+    });
+    // Close on outside click
+    document.addEventListener('click', e => {
+      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+      }
+    });
+  }
 </script>
 </body>
 </html>
