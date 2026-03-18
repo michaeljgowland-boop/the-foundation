@@ -104,9 +104,9 @@ function updateNavAuth() {
       document.getElementById('mobile-logout-btn')?.addEventListener('click', logout);
     }
   } else {
-    const joinHtml = `<a href="/join.html" class="nav-auth-btn" id="nav-auth-btn">Join</a>`;
+    const joinHtml = `<a href="/join.html" class="nav-auth-btn" id="nav-auth-btn">Join / Sign In</a>`;
     if (authEl) authEl.innerHTML = joinHtml;
-    if (mobileAuthEl) mobileAuthEl.innerHTML = `<a href="/join.html" class="nav-auth-btn">Join</a>`;
+    if (mobileAuthEl) mobileAuthEl.innerHTML = `<a href="/join.html" class="nav-auth-btn">Join / Sign In</a>`;
   }
 }
 

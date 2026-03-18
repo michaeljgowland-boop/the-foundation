@@ -154,13 +154,13 @@ nav.scrolled {
 /* Single auth button — used for both "Join / Sign in" and "Sign out" states */
 .nav-auth-btn {
   font-family: 'Cinzel', serif;
-  font-size: 0.54rem;
-  letter-spacing: 0.3em;
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--void);
   background: var(--gold);
   border: 1px solid var(--gold);
-  padding: 0.38rem 1rem;
+  padding: 0.38rem 1.1rem;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
