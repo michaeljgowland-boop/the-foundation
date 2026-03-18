@@ -1174,22 +1174,24 @@ footer {
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); background: var(--gold); }
 
 .nav-mobile-menu {
-  display: none;
   position: fixed;
   top: var(--nav-height);
   left: 0; right: 0;
   background: rgba(7, 7, 15, 0.97);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   z-index: 99;
   padding: 1.5rem 0 2rem;
   transform: translateY(-8px);
   opacity: 0;
+  pointer-events: none;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 .nav-mobile-menu.open {
   transform: translateY(0);
   opacity: 1;
+  pointer-events: auto;
 }
 .nav-mobile-menu a {
   display: block;
@@ -1223,8 +1225,8 @@ footer {
   :root { --nav-height: 60px; }
   nav { padding: 0 1.25rem; }
   .nav-links { display: none; }
+  .nav-auth { display: none; }
   .nav-hamburger { display: flex; }
-  .nav-mobile-menu { display: block; }
 
   .articles-grid,
   .articles-full-grid { grid-template-columns: 1fr; }
@@ -1246,4 +1248,14 @@ footer {
   .modal-box { padding: 2rem 1.5rem; margin: 1rem; }
   footer { padding: 2.5rem 1.5rem; }
   .footer-rule { left: 1.5rem; right: 1.5rem; }
+
+  /* Better mobile typography */
+  html { font-size: 16px; }
+  .article-body p { font-size: 1.05rem; }
+  .article-body h2 { font-size: 1.6rem; }
+  .article-page { padding-left: 1.25rem; padding-right: 1.25rem; }
+
+  /* Mobile menu links — more tappable */
+  .nav-mobile-menu a { padding: 1.1rem 1.5rem; font-size: 0.7rem; letter-spacing: 0.35em; }
+  .nav-mobile-menu .mobile-join { margin: 1rem 1.5rem 0; }
 }
