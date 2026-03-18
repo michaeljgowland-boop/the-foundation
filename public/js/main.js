@@ -77,19 +77,36 @@ async function checkAuth() {
 
 function updateNavAuth() {
   const authEl = document.getElementById('nav-auth');
-  if (!authEl) return;
+  const mobileAuthEl = document.getElementById('nav-mobile-auth');
+
   if (currentUser) {
-    authEl.innerHTML = `
-      <span class="nav-username">${currentUser.display_name}</span>
-      <button class="nav-signin" id="logout-btn">Sign out</button>
-    `;
-    document.getElementById('logout-btn')?.addEventListener('click', logout);
+    const adminLink = currentUser.is_admin
+      ? `<a href="/admin.html" class="nav-admin-link">Admin</a>`
+      : '';
+    const mobileAdminLink = currentUser.is_admin
+      ? `<a href="/admin.html" class="nav-auth-btn" style="background:transparent;color:var(--gold-dim);">Admin</a>`
+      : '';
+
+    if (authEl) {
+      authEl.innerHTML = `
+        <span class="nav-username">${currentUser.display_name}</span>
+        ${adminLink}
+        <button class="nav-auth-btn signed-in" id="logout-btn">Sign out</button>
+      `;
+      document.getElementById('logout-btn')?.addEventListener('click', logout);
+    }
+    if (mobileAuthEl) {
+      mobileAuthEl.innerHTML = `
+        <span class="nav-username">${currentUser.display_name}</span>
+        ${mobileAdminLink}
+        <button class="nav-auth-btn signed-in" id="mobile-logout-btn">Sign out</button>
+      `;
+      document.getElementById('mobile-logout-btn')?.addEventListener('click', logout);
+    }
   } else {
-    authEl.innerHTML = `
-      <button class="nav-signin" id="signin-btn">Sign in</button>
-      <a href="/join.html" class="nav-join">Join</a>
-    `;
-    document.getElementById('signin-btn')?.addEventListener('click', () => openModal('login'));
+    const joinHtml = `<a href="/join.html" class="nav-auth-btn" id="nav-auth-btn">Join</a>`;
+    if (authEl) authEl.innerHTML = joinHtml;
+    if (mobileAuthEl) mobileAuthEl.innerHTML = `<a href="/join.html" class="nav-auth-btn">Join</a>`;
   }
 }
 

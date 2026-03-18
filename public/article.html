@@ -11,20 +11,24 @@
 <body>
 
 <nav id="nav">
-  <div class="nav-mark"><a href="/">The Foundation</a></div>
-  <ul class="nav-links">
+  <div class="nav-top">
+    <div class="nav-mark"><a href="/">The Foundation</a></div>
+    <div class="nav-auth" id="nav-auth">
+      <a href="/join.html" class="nav-auth-btn" id="nav-auth-btn">Join</a>
+    </div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-bottom">
+    <ul class="nav-links">
     <li><a href="/manifesto.html">Manifesto</a></li>
     <li><a href="/analysis.html">Analysis</a></li>
     <li><a href="/action.html">Action</a></li>
     <li><a href="/convergence.html">The Convergence</a></li>
     <li><a href="/about.html">About</a></li>
     <li><a href="/contact.html">Contact</a></li>
-  </ul>
-  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <div class="nav-auth" id="nav-auth">
-    <a href="/join.html" class="nav-join">Join</a>
+    </ul>
   </div>
 </nav>
 <div class="nav-mobile-menu" id="nav-mobile-menu">
@@ -34,7 +38,9 @@
   <a href="/convergence.html">The Convergence</a>
   <a href="/about.html">About</a>
   <a href="/contact.html">Contact</a>
-  <a href="/join.html" class="mobile-join">Join</a>
+  <div class="nav-mobile-auth" id="nav-mobile-auth">
+    <a href="/join.html" class="nav-auth-btn" id="nav-mobile-auth-btn">Join</a>
+  </div>
 </div>
 
 <main class="article-page" id="article-content">

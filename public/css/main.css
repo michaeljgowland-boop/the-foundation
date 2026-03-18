@@ -26,7 +26,7 @@
   --convergence-bright: #6aa8cc;
   --convergence-glow:   rgba(106, 168, 204, 0.10);
 
-  --nav-height: 72px;
+  --nav-height: 80px;
   --section-pad: clamp(4rem, 8vw, 7rem);
   --content-width: 820px;
 }
@@ -81,15 +81,20 @@ body::after {
 }
 
 /* =================== NAVIGATION =================== */
+/*
+  Two-row structure:
+    Row 1 (.nav-top): auth button right, wordmark centred
+    Row 2 (.nav-bottom): links centred
+  On mobile: collapses to single row — wordmark centred, auth + hamburger right
+*/
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
   height: var(--nav-height);
-  padding: 0 2.5rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   background: rgba(7, 7, 15, 0.78);
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
@@ -102,12 +107,32 @@ nav.scrolled {
   border-bottom-color: var(--border);
 }
 
-/* wordmark */
+/* Row 1 — wordmark + auth */
+.nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 2.5rem;
+  height: 42px;
+}
+
+/* Row 2 — page links */
+.nav-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2.5rem;
+  height: 30px;
+  border-top: 1px solid rgba(40,40,74,0.4);
+}
+
+/* wordmark — centred in row 1 */
 .nav-mark a {
   font-family: 'Cinzel', serif;
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.45em;
+  letter-spacing: 0.5em;
   color: var(--gold);
   text-transform: uppercase;
   text-decoration: none;
@@ -115,74 +140,89 @@ nav.scrolled {
 }
 .nav-mark a:hover { color: var(--gold-bright); }
 
-/* centre links — absolutely positioned so they sit truly centred */
-.nav-links {
-  display: flex;
-  gap: 0;
-  list-style: none;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.nav-links li a {
-  display: block;
-  font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--bright);
-  text-decoration: none;
-  padding: 0.6rem 1.1rem;
-  border-bottom: 2px solid transparent;
-  transition: color 0.25s, border-color 0.25s;
-}
-.nav-links li a:hover  { color: var(--gold-bright); }
-.nav-links li a.active { color: var(--gold); border-bottom-color: var(--gold); }
-
-/* right side */
+/* auth — pinned to right of row 1 */
 .nav-auth {
+  position: absolute;
+  right: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  gap: 0.85rem;
   align-items: center;
+  gap: 0.6rem;
 }
 
-.nav-signin {
+/* Single auth button — used for both "Join / Sign in" and "Sign out" states */
+.nav-auth-btn {
   font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--subtle);
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color 0.25s;
-  padding: 0;
-}
-.nav-signin:hover { color: var(--gold); }
-
-.nav-username {
-  font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-.nav-join {
-  font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
+  font-size: 0.54rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--void);
   background: var(--gold);
   border: 1px solid var(--gold);
-  padding: 0.48rem 1.2rem;
+  padding: 0.38rem 1rem;
   text-decoration: none;
   white-space: nowrap;
+  cursor: pointer;
   transition: background 0.25s, color 0.25s;
+  line-height: 1;
 }
-.nav-join:hover { background: transparent; color: var(--gold); }
+.nav-auth-btn:hover { background: transparent; color: var(--gold); }
+
+/* Signed-in state — ghost style */
+.nav-auth-btn.signed-in {
+  background: transparent;
+  color: var(--gold);
+}
+.nav-auth-btn.signed-in:hover { background: var(--gold); color: var(--void); }
+
+/* username label — shown when signed in */
+.nav-username {
+  font-family: 'Cinzel', serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* admin link shown only to admins */
+.nav-admin-link {
+  font-family: 'Cinzel', serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+.nav-admin-link:hover { color: var(--gold); }
+
+/* nav links row */
+.nav-links {
+  display: flex;
+  gap: 0;
+  list-style: none;
+}
+
+.nav-links li a {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.54rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--subtle);
+  text-decoration: none;
+  padding: 0.3rem 0.9rem;
+  border-bottom: 1px solid transparent;
+  transition: color 0.25s, border-color 0.25s;
+}
+.nav-links li a:hover  { color: var(--gold-bright); }
+.nav-links li a.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* Legacy classes — kept for any inline JS that still references them */
+.nav-signin { display: none; }
+.nav-join   { display: none; }
 
 /* =================== HERO =================== */
 .hero {
@@ -1182,7 +1222,7 @@ footer {
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   z-index: 99;
-  padding: 1.5rem 0 2rem;
+  padding: 0.5rem 0 1.5rem;
   transform: translateY(-8px);
   opacity: 0;
   pointer-events: none;
@@ -1201,32 +1241,53 @@ footer {
   text-transform: uppercase;
   color: var(--bright);
   text-decoration: none;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-soft);
   transition: color 0.2s, background 0.2s;
 }
 .nav-mobile-menu a:last-child { border-bottom: none; }
 .nav-mobile-menu a:hover { color: var(--gold); background: rgba(200,168,75,0.04); }
 .nav-mobile-menu a.active { color: var(--gold); }
-.nav-mobile-menu .mobile-join {
-  margin: 1rem 2rem 0;
-  display: inline-block;
-  color: var(--void);
-  background: var(--gold);
-  border: 1px solid var(--gold);
-  text-align: center;
-  padding: 0.75rem 2rem;
-  font-size: 0.6rem;
-  letter-spacing: 0.4em;
+/* Auth row inside mobile menu */
+.nav-mobile-auth {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem 0.5rem;
+  border-top: 1px solid var(--border);
+  margin-top: 0.25rem;
 }
-.nav-mobile-menu .mobile-join:hover { background: transparent; color: var(--gold); }
+.nav-mobile-auth .nav-auth-btn {
+  font-size: 0.6rem;
+  padding: 0.5rem 1.2rem;
+}
+.nav-mobile-auth .nav-username {
+  font-size: 0.58rem;
+}
 
 @media (max-width: 760px) {
-  :root { --nav-height: 60px; }
-  nav { padding: 0 1.25rem; }
+  :root { --nav-height: 56px; }
+  nav {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 1.25rem;
+    height: var(--nav-height);
+  }
+  .nav-top, .nav-bottom { display: none; }
+  /* Mobile nav is a single row: wordmark centred, right-side controls */
+  nav::before {
+    content: '';
+    flex: 1;
+  }
+  .nav-mark {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .nav-mark a { font-size: 0.65rem; letter-spacing: 0.4em; }
   .nav-links { display: none; }
   .nav-auth { display: none; }
-  .nav-hamburger { display: flex; }
+  .nav-hamburger { display: flex; margin-left: auto; }
 
   .articles-grid,
   .articles-full-grid { grid-template-columns: 1fr; }
@@ -1257,5 +1318,4 @@ footer {
 
   /* Mobile menu links — more tappable */
   .nav-mobile-menu a { padding: 1.1rem 1.5rem; font-size: 0.7rem; letter-spacing: 0.35em; }
-  .nav-mobile-menu .mobile-join { margin: 1rem 1.5rem 0; }
 }

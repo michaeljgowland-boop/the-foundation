@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — The Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css">
+<style>
+  /* ── Admin-specific styles ── */
+  .admin-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: calc(var(--nav-height) + 3rem) 2rem 6rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .admin-header {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2rem;
+  }
+
+  .admin-header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .admin-header p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* Stats bar */
+  .admin-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    padding: 1.5rem 1.75rem;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Tabs */
+  .admin-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+    gap: 0;
+  }
+
+  .admin-tab {
+    font-family: 'Cinzel', serif;
+    font-size: 0.56rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.85rem 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    margin-bottom: -1px;
+  }
+
+  .admin-tab:hover { color: var(--bright); }
+  .admin-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Tables */
+  .admin-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  thead th {
+    font-family: 'Cinzel', serif;
+    font-size: 0.48rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.85rem 1.25rem;
+    text-align: left;
+    background: var(--deep);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border-soft);
+    transition: background 0.15s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(200,168,75,0.03); }
+
+  td {
+    padding: 0.85rem 1.25rem;
+    color: var(--text);
+    vertical-align: middle;
+  }
+
+  td.email { color: var(--bright); font-size: 0.88rem; }
+  td.mono  { font-family: monospace; font-size: 0.8rem; color: var(--subtle); }
+  td.date  { font-size: 0.8rem; color: var(--subtle); white-space: nowrap; }
+
+  .badge {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.44rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid currentColor;
+  }
+
+  .badge-admin    { color: var(--gold); }
+  .badge-banned   { color: var(--crimson-bright); }
+  .badge-member   { color: var(--convergence-bright); }
+
+  /* Action buttons */
+  .action-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.48rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--subtle);
+    padding: 0.28rem 0.7rem;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    margin-right: 0.3rem;
+    margin-bottom: 0.2rem;
+  }
+  .action-btn:hover { color: var(--bright); border-color: var(--subtle); }
+  .action-btn.danger:hover { color: var(--crimson-bright); border-color: var(--crimson-bright); }
+  .action-btn.promote:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* Comment moderation */
+  .comment-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .comment-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+  }
+
+  .comment-card-meta {
+    font-family: 'Cinzel', serif;
+    font-size: 0.52rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .comment-card-meta strong { color: var(--gold); }
+  .comment-card-meta a { color: var(--convergence-bright); text-decoration: none; }
+  .comment-card-meta a:hover { text-decoration: underline; }
+
+  .comment-card-body {
+    font-size: 0.97rem;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    padding: 1rem 1.25rem;
+    background: var(--deep);
+    border-left: 2px solid var(--border);
+  }
+
+  .comment-card-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+  /* Pagination */
+  .admin-pagination {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    align-items: center;
+  }
+
+  .page-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--subtle);
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .page-btn:hover, .page-btn.active { color: var(--gold); border-color: var(--gold); }
+  .page-btn:disabled { opacity: 0.3; cursor: default; }
+
+  .page-info {
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    padding: 0 0.5rem;
+  }
+
+  /* Section label within admin */
+  .admin-section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.52rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 1.25rem;
+  }
+
+  /* Growth chart (CSS bars) */
+  .growth-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 80px;
+    margin-bottom: 0.5rem;
+  }
+
+  .growth-bar {
+    flex: 1;
+    background: var(--gold-dim);
+    transition: background 0.2s;
+    min-height: 2px;
+    position: relative;
+  }
+  .growth-bar:hover { background: var(--gold); }
+  .growth-bar .bar-tip {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--raised);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+    color: var(--bright);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .growth-bar:hover .bar-tip { display: block; }
+
+  .growth-label {
+    font-size: 0.65rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* Source breakdown */
+  .source-list { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .source-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.6rem 1.2rem;
+    text-align: center;
+    min-width: 100px;
+  }
+  .source-count {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+  .source-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.44rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-top: 0.3rem;
+  }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--muted);
+    font-style: italic;
+    border: 1px solid var(--border-soft);
+  }
+
+  /* Alert / feedback */
+  .admin-alert {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.54rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    display: none;
+  }
+  .admin-alert.success { background: rgba(200,168,75,0.1); border: 1px solid var(--gold-dim); color: var(--gold); }
+  .admin-alert.error   { background: rgba(192,48,48,0.1); border: 1px solid var(--crimson-bright); color: var(--crimson-bright); }
+
+  /* Access denied */
+  #access-denied {
+    text-align: center;
+    padding: 8rem 2rem;
+  }
+  #access-denied h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  #access-denied p {
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 760px) {
+    .admin-stats { grid-template-columns: 1fr 1fr; }
+    .admin-tabs { overflow-x: auto; }
+    .admin-tab { padding: 0.85rem 1rem; white-space: nowrap; }
+    .stat-number { font-size: 2rem; }
+    .admin-page { padding-left: 1rem; padding-right: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-top">
+    <div class="nav-mark"><a href="/">The Foundation</a></div>
+    <div class="nav-auth" id="nav-auth">
+      <a href="/join.html" class="nav-auth-btn" id="nav-auth-btn">Join</a>
+    </div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-bottom">
+    <ul class="nav-links">
+      <li><a href="/manifesto.html">Manifesto</a></li>
+      <li><a href="/analysis.html">Analysis</a></li>
+      <li><a href="/action.html">Action</a></li>
+      <li><a href="/convergence.html">The Convergence</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="/manifesto.html">Manifesto</a>
+  <a href="/analysis.html">Analysis</a>
+  <a href="/action.html">Action</a>
+  <a href="/convergence.html">The Convergence</a>
+  <a href="/about.html">About</a>
+  <a href="/contact.html">Contact</a>
+  <div class="nav-mobile-auth" id="nav-mobile-auth">
+    <a href="/join.html" class="nav-auth-btn">Join</a>
+  </div>
+</div>
+
+<div class="admin-page" id="admin-page" style="display:none;">
+
+  <div class="admin-header">
+    <h1>Administration</h1>
+    <p id="admin-subtitle">Foundation management console</p>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="admin-stats" id="admin-stats">
+    <div class="stat-card">
+      <div class="stat-number" id="stat-members">—</div>
+      <div class="stat-label">Mailing List</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="stat-users">—</div>
+      <div class="stat-label">Registered Users</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="stat-pending">—</div>
+      <div class="stat-label">Pending Comments</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="stat-flagged">—</div>
+      <div class="stat-label">Flagged Comments</div>
+    </div>
+  </div>
+
+  <div class="admin-alert" id="admin-alert"></div>
+
+  <!-- Tabs -->
+  <div class="admin-tabs">
+    <button class="admin-tab active" data-tab="members">Mailing List</button>
+    <button class="admin-tab" data-tab="users">Members</button>
+    <button class="admin-tab" data-tab="comments">Comments</button>
+  </div>
+
+  <!-- ── MAILING LIST TAB ── -->
+  <div class="tab-panel active" id="tab-members">
+    <div id="members-growth-section" style="margin-bottom:2.5rem; display:none;">
+      <div class="admin-section-label">Signups — Last 30 Days</div>
+      <div class="growth-chart" id="growth-chart"></div>
+      <div class="growth-label" id="growth-label"></div>
+    </div>
+
+    <div id="members-source-section" style="margin-bottom:2.5rem; display:none;">
+      <div class="admin-section-label">By Source</div>
+      <div class="source-list" id="source-list"></div>
+    </div>
+
+    <div class="admin-section-label">All Subscribers</div>
+    <div class="admin-table-wrap">
+      <table id="members-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Email</th>
+            <th>Source</th>
+            <th>Joined</th>
+          </tr>
+        </thead>
+        <tbody id="members-tbody"></tbody>
+      </table>
+    </div>
+    <div class="admin-pagination" id="members-pagination"></div>
+  </div>
+
+  <!-- ── REGISTERED USERS TAB ── -->
+  <div class="tab-panel" id="tab-users">
+    <div class="admin-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Display Name</th>
+            <th>Email</th>
+            <th>Joined</th>
+            <th>Sessions</th>
+            <th>Comments</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="users-tbody"></tbody>
+      </table>
+    </div>
+    <div class="admin-pagination" id="users-pagination"></div>
+  </div>
+
+  <!-- ── COMMENTS TAB ── -->
+  <div class="tab-panel" id="tab-comments">
+    <div style="margin-bottom: 2rem;">
+      <button class="admin-tab active" data-comments-tab="pending" id="comments-tab-pending">Pending</button>
+      <button class="admin-tab" data-comments-tab="flagged" id="comments-tab-flagged">Flagged</button>
+    </div>
+
+    <div id="comments-pending-panel">
+      <div id="pending-list"></div>
+    </div>
+
+    <div id="comments-flagged-panel" style="display:none;">
+      <div id="flagged-list"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Access denied -->
+<div id="access-denied" style="display:none; position:relative; z-index:2;">
+  <h2>Restricted</h2>
+  <p>This page is only accessible to Foundation administrators.</p>
+  <a href="/" class="btn-primary">Return home</a>
+</div>
+
+<script src="/js/main.js"></script>
+<script>
+(async function() {
+  // Wait for auth check
+  await new Promise(r => setTimeout(r, 600));
+
+  const user = window.foundationAuth.getCurrentUser();
+
+  if (!user || !user.is_admin) {
+    document.getElementById('access-denied').style.display = 'block';
+    return;
+  }
+
+  document.getElementById('admin-page').style.display = 'block';
+  document.getElementById('admin-subtitle').textContent =
+    `Signed in as ${user.display_name} · ${new Date().toLocaleDateString('en-GB', {weekday:'long', day:'numeric', month:'long', year:'numeric'})}`;
+
+  // ── State ──
+  let membersPage = 1, usersPage = 1;
+  let commentsData = null;
+
+  // ── Tab switching ──
+  document.querySelectorAll('.admin-tab[data-tab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.admin-tab[data-tab]').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      if (btn.dataset.tab === 'members') loadMembers(membersPage);
+      if (btn.dataset.tab === 'users') loadUsers(usersPage);
+      if (btn.dataset.tab === 'comments') loadComments();
+    });
+  });
+
+  // Comments sub-tabs
+  document.querySelectorAll('[data-comments-tab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-comments-tab]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const isPending = btn.dataset.commentsTab === 'pending';
+      document.getElementById('comments-pending-panel').style.display = isPending ? 'block' : 'none';
+      document.getElementById('comments-flagged-panel').style.display = isPending ? 'none' : 'block';
+    });
+  });
+
+  // ── Helpers ──
+  function showAlert(msg, type = 'success') {
+    const el = document.getElementById('admin-alert');
+    el.textContent = msg;
+    el.className = `admin-alert ${type}`;
+    el.style.display = 'block';
+    setTimeout(() => { el.style.display = 'none'; }, 3500);
+  }
+
+  function formatDate(str) {
+    if (!str) return '—';
+    return new Date(str).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+  }
+
+  function pagination(container, current, total, onPage) {
+    container.innerHTML = '';
+    if (total <= 1) return;
+    const prev = document.createElement('button');
+    prev.className = 'page-btn';
+    prev.textContent = '←';
+    prev.disabled = current <= 1;
+    prev.onclick = () => onPage(current - 1);
+    container.appendChild(prev);
+
+    const info = document.createElement('span');
+    info.className = 'page-info';
+    info.textContent = `${current} / ${total}`;
+    container.appendChild(info);
+
+    const next = document.createElement('button');
+    next.className = 'page-btn';
+    next.textContent = '→';
+    next.disabled = current >= total;
+    next.onclick = () => onPage(current + 1);
+    container.appendChild(next);
+  }
+
+  // ── Load stats ──
+  async function loadStats() {
+    const [membersRes, usersRes, commentsRes] = await Promise.all([
+      fetch('/api/admin/members').then(r => r.json()),
+      fetch('/api/admin/users').then(r => r.json()),
+      fetch('/api/admin/comments').then(r => r.json()),
+    ]);
+    document.getElementById('stat-members').textContent = membersRes.total ?? '—';
+    document.getElementById('stat-users').textContent = usersRes.total ?? '—';
+    document.getElementById('stat-pending').textContent = (commentsRes.pending ?? []).length;
+    document.getElementById('stat-flagged').textContent = (commentsRes.flagged ?? []).length;
+  }
+
+  // ── Members ──
+  async function loadMembers(page) {
+    membersPage = page;
+    const data = await fetch(`/api/admin/members?page=${page}`).then(r => r.json());
+
+    // Growth chart
+    if (data.by_day && data.by_day.length > 0) {
+      const section = document.getElementById('members-growth-section');
+      section.style.display = 'block';
+      const chart = document.getElementById('growth-chart');
+      chart.innerHTML = '';
+      const max = Math.max(...data.by_day.map(d => d.count), 1);
+      data.by_day.forEach(d => {
+        const bar = document.createElement('div');
+        bar.className = 'growth-bar';
+        bar.style.height = `${Math.max(4, Math.round((d.count / max) * 80))}px`;
+        bar.innerHTML = `<div class="bar-tip">${d.day}: ${d.count}</div>`;
+        chart.appendChild(bar);
+      });
+      document.getElementById('growth-label').textContent =
+        `${data.by_day.reduce((s,d) => s + d.count, 0)} new subscribers in the last 30 days`;
+    }
+
+    // Source breakdown
+    if (data.by_source && data.by_source.length > 0) {
+      const section = document.getElementById('members-source-section');
+      section.style.display = 'block';
+      document.getElementById('source-list').innerHTML = data.by_source.map(s =>
+        `<div class="source-item">
+          <span class="source-count">${s.count}</span>
+          <span class="source-name">${s.source || 'unknown'}</span>
+        </div>`
+      ).join('');
+    }
+
+    // Table
+    const tbody = document.getElementById('members-tbody');
+    if (!data.members || data.members.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--muted);font-style:italic;padding:2rem;">No subscribers yet</td></tr>';
+    } else {
+      tbody.innerHTML = data.members.map((m, i) =>
+        `<tr>
+          <td class="mono">${((page-1)*100) + i + 1}</td>
+          <td class="email">${m.email}</td>
+          <td><span class="badge badge-member">${m.source || 'unknown'}</span></td>
+          <td class="date">${formatDate(m.joined_at)}</td>
+        </tr>`
+      ).join('');
+    }
+
+    pagination(
+      document.getElementById('members-pagination'),
+      data.page, data.pages,
+      p => loadMembers(p)
+    );
+  }
+
+  // ── Users ──
+  async function loadUsers(page) {
+    usersPage = page;
+    const data = await fetch(`/api/admin/users?page=${page}`).then(r => r.json());
+    const tbody = document.getElementById('users-tbody');
+    const currentUserId = user.id;
+
+    if (!data.users || data.users.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--muted);font-style:italic;padding:2rem;">No registered users</td></tr>';
+    } else {
+      tbody.innerHTML = data.users.map((u, i) => {
+        const isSelf = u.id === currentUserId;
+        const badges = [
+          u.is_admin  ? `<span class="badge badge-admin">Admin</span>` : '',
+          u.is_banned ? `<span class="badge badge-banned">Banned</span>` : '',
+        ].filter(Boolean).join(' ') || '<span style="color:var(--muted);font-size:0.8rem;">—</span>';
+
+        const actions = isSelf ? '<span style="color:var(--muted);font-size:0.8rem;font-style:italic;">You</span>' : `
+          ${u.is_banned
+            ? `<button class="action-btn" onclick="userAction(${u.id},'unban')">Unban</button>`
+            : `<button class="action-btn danger" onclick="userAction(${u.id},'ban')">Ban</button>`}
+          ${u.is_admin
+            ? `<button class="action-btn danger" onclick="userAction(${u.id},'remove_admin')">Remove Admin</button>`
+            : `<button class="action-btn promote" onclick="userAction(${u.id},'make_admin')">Make Admin</button>`}
+        `;
+
+        return `<tr>
+          <td class="mono">${((page-1)*50) + i + 1}</td>
+          <td style="color:var(--bright)">${u.display_name}</td>
+          <td class="email" style="font-size:0.82rem;">${u.email}</td>
+          <td class="date">${formatDate(u.created_at)}</td>
+          <td style="text-align:center;color:var(--subtle)">${u.active_sessions}</td>
+          <td style="text-align:center;color:var(--subtle)">${u.comment_count}</td>
+          <td>${badges}</td>
+          <td>${actions}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    pagination(
+      document.getElementById('users-pagination'),
+      data.page, data.pages,
+      p => loadUsers(p)
+    );
+  }
+
+  window.userAction = async function(userId, action) {
+    const labels = {
+      ban: 'Ban this user?',
+      unban: 'Unban this user?',
+      make_admin: 'Grant admin access?',
+      remove_admin: 'Remove admin access?',
+    };
+    if (!confirm(labels[action])) return;
+    const res = await fetch('/api/admin/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: userId, action }),
+    });
+    if (res.ok) {
+      showAlert('Updated successfully');
+      loadUsers(usersPage);
+      loadStats();
+    } else {
+      const d = await res.json();
+      showAlert(d.error || 'Action failed', 'error');
+    }
+  };
+
+  // ── Comments ──
+  async function loadComments() {
+    if (commentsData) { renderComments(commentsData); return; }
+    commentsData = await fetch('/api/admin/comments').then(r => r.json());
+    renderComments(commentsData);
+  }
+
+  function renderComments(data) {
+    renderCommentList('pending-list', data.pending || [], 'No comments awaiting moderation.');
+    renderCommentList('flagged-list', data.flagged || [], 'No flagged comments.');
+  }
+
+  function renderCommentList(containerId, items, emptyMsg) {
+    const el = document.getElementById(containerId);
+    if (!items.length) {
+      el.innerHTML = `<div class="empty-state">${emptyMsg}</div>`;
+      return;
+    }
+    el.innerHTML = items.map(c => `
+      <div class="comment-card" id="comment-${c.id}">
+        <div class="comment-card-header">
+          <div class="comment-card-meta">
+            <strong>${c.display_name}</strong> · ${c.email}<br>
+            Article: <a href="/article?slug=${c.article_slug}" target="_blank">${c.article_slug}</a>
+            · ${formatDate(c.created_at)}
+            ${c.flag_count ? `· <span style="color:var(--crimson-bright)">${c.flag_count} flag${c.flag_count !== 1 ? 's' : ''}</span>` : ''}
+          </div>
+        </div>
+        <div class="comment-card-body">${c.body}</div>
+        <div class="comment-card-actions">
+          <button class="action-btn promote" onclick="moderateComment(${c.id},'approve')">Approve</button>
+          <button class="action-btn danger" onclick="moderateComment(${c.id},'reject')">Reject &amp; Delete</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  window.moderateComment = async function(commentId, action) {
+    const res = await fetch('/api/admin/comments', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ comment_id: commentId, action }),
+    });
+    if (res.ok) {
+      document.getElementById(`comment-${commentId}`)?.remove();
+      showAlert(action === 'approve' ? 'Comment approved' : 'Comment deleted');
+      loadStats();
+    } else {
+      showAlert('Action failed', 'error');
+    }
+  };
+
+  // ── Init ──
+  loadStats();
+  loadMembers(1);
+})();
+</script>
+
+</body>
+</html>
